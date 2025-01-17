@@ -4,6 +4,7 @@
 <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
 <input @bind="newTodo" />
 <button @onclick="addTodo">Add Todo</button>
+<button @onclick="removeTodo">Remove Todo</button>
 
 
 <ul>
@@ -26,6 +27,13 @@
             todos.Add(new TodoItem { Title = newTodo });
             newTodo = string.Empty;
         }
+
+    }
+
+    void removeTodo(){
+
+        todos = todos.Where(todo => !todo.IsDone).ToList();
+
     }
 
 }
