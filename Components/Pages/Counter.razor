@@ -6,11 +6,24 @@
 <h1>Counter</h1>
 
 <p role="status">Current count: @currentCount</p>
-
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+
+<div class="mt-4">
+    <input @onchange="OnChange" placeholder="OnChange" />
+    <p>@text1</p>
+
+    <input @oninput="OnInput" placeholder="OnInput" />
+    <p>@text2</p>
+</div>
+
+
+<div style="background-color:beige" @onmouseover="MouseOver" @onmouseout="MouseOut"> @text3 </div>
 
 @code {
     private int currentCount = 0;
+    string text1 = "";
+    string text2 = "";
+    string text3 = "Mouse Over";
 
     [Parameter]
     public int IncrementCountDef { get; set; } = 1;
@@ -19,4 +32,12 @@
     {
         currentCount+=IncrementCountDef;
     }
+    private void OnChange(ChangeEventArgs e) => text1 = (string)e.Value!;
+
+    private void OnInput(ChangeEventArgs e) => text2 = (string)e.Value!;
+
+    private void MouseOut(MouseEventArgs e) => text3 = "Mouse Out";
+
+    private void MouseOver(MouseEventArgs e) => text3 = "Mouse Over";
+
 }
